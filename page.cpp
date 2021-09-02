@@ -11,6 +11,8 @@
 
 extern "C" {
 #include <mupdf/fitz.h>
+#include <mupdf/pdf.h>
+#include <mupdf/pdf/page.h>
 }
 
 #include <QDebug>
@@ -33,7 +35,7 @@ QImage convert_fz_pixmap(fz_context *ctx, fz_pixmap *image)
 {
     const int w = fz_pixmap_width(ctx, image);
     const int h = fz_pixmap_height(ctx, image);
-    QImage img(w, h, QImage::Format_ARGB32);
+    QImage img(w, h, QImage::Format_RGBA8888);
 
     if (img.bytesPerLine() == fz_pixmap_stride(ctx, image)) {
         memcpy(img.bits(), fz_pixmap_samples(ctx, image), img.sizeInBytes());
@@ -94,6 +96,12 @@ qreal Page::duration() const
     float val;
     (void)fz_page_presentation(d->ctx, d->page, nullptr, &val);
     return val < 0.1 ? -1 : val;
+}
+
+QString Page::label() const
+{
+//     fz_page *fzpage = fz_load_page(d->ctx, d->doc, (d->page).pageNum);
+    return QString(fz_get_page_label(d->ctx, d->doc, d->page));
 }
 
 QImage Page::render(qreal width, qreal height) const
