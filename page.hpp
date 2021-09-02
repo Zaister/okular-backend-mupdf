@@ -35,6 +35,7 @@ public:
     int number() const;
     QSizeF size(const QSizeF &dpi) const;
     qreal duration() const;
+    QString label() const;
     QImage render(qreal width, qreal height) const;
     QVector<TextBox *> textBoxes(const QSizeF &dpi) const;
 

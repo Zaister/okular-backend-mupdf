@@ -54,6 +54,7 @@ Okular::Document::OpenResult MuPDFGenerator::loadDocumentWithPassword(
         const Okular::Rotation rot = Okular::Rotation0;
         Okular::Page *okularPage = new Okular::Page(i, s.width(), s.height(), rot);
         okularPage->setDuration(page.duration());
+        okularPage->setLabel(page.label());
         pages.append(okularPage);
     }
 

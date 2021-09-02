@@ -12,6 +12,7 @@
 
 extern "C" {
 #include <mupdf/fitz.h>
+#include <mupdf/pdf.h>
 }
 
 #include <okular/core/document.h>
